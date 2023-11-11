@@ -128,7 +128,9 @@ input
 ## Util
   - MagicNumber
   - Amount
-  - phrase
+  - Phrase
+  - InputValidation
+
 
 
 돈은 어차피 고정된 값이니까 그냥 인스턴스 필드로 던져줘도 괜찮다
