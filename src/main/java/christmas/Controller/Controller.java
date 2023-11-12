@@ -12,7 +12,12 @@ public class Controller {
     private final InputView inputView;
     private final OutputView outputView;
     private final CheckCalendar checkCalendar;
+    boolean isWeekday;
+    boolean isWeekend;
+    boolean isSpecial;
+    boolean isAfterChristmas;
     private final Menu menu;
+
     private Map<String, Integer> menuMap;
 
 
@@ -28,61 +33,90 @@ public class Controller {
         checkDate(date);
         printInformation(date);
         menuMap = inputView.readMenu();
-        checkMenu(menuMap);
         printMenu(menuMap);
-        System.out.println("주문한 메뉴: " + menuMap);
-        int totalValue = calculateTotalValue(menuMap);
-        printTotalValue(totalValue);
+        int totalPrice = calculateTotalPrice(menuMap);
+        printTotalPrice(totalPrice);
 
-        System.out.println(totalValue);
-
-        //메뉴확인
-        //디데이할인
-        //평일/주말할인
-        //특별할인
+        int totalBenefitPrice = 0;
+        totalBenefitPrice += dDayDiscount(date);
+        totalBenefitPrice += weekDiscount();
+        totalBenefitPrice += specialDiscount();
+//        totalBenefitPrice +=
         //증정이벤트
         //배지
 
     }
 
 
+
     private void checkDate(int date) {
         int dayOfWeek = checkCalendar.getDayOfWeek(date);
-        boolean isWeekday = checkCalendar.isWeekday(dayOfWeek);
-        boolean isWeekend = checkCalendar.isWeekend(dayOfWeek);
-        boolean isSpecial = checkCalendar.isSpecial(date, dayOfWeek);
-        boolean isAfterChristmas = checkCalendar.isAfterChristmas(date);
+        isWeekday = checkCalendar.isWeekday(dayOfWeek);
+        isWeekend = checkCalendar.isWeekend(dayOfWeek);
+        isSpecial = checkCalendar.isSpecial(date, dayOfWeek);
+        isAfterChristmas = checkCalendar.isAfterChristmas(date);
     }
 
     private void printInformation(int date) {
         outputView.printInformation(date);
     }
 
-    private int calculateTotalValue(Map<String, Integer> menuMap) {
-        int totalValue = 0;
+    private int calculateTotalPrice(Map<String, Integer> menuMap) {
+        int totalPrice = 0;
 
         for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
             String menuName = entry.getKey();
             int count = entry.getValue();
             int menuPrice = menu.getPrice(menuName); // 수정된 부분
 
-            totalValue += menuPrice * count;
+            totalPrice += menuPrice * count;
         }
 
-        return totalValue;
-
-
-    }
-
-    private void checkMenu(Map<String, Integer> menu) {
-
-
+        return totalPrice;
     }
 
     private void printMenu(Map<String, Integer> menu) {
+        outputView.printMenu(menu);
     }
 
-    private void printTotalValue(int totalValue){
-        outputView.printTotalPrice(totalValue);
+    private void printTotalPrice(int totalPrice) {
+        outputView.printTotalPrice(totalPrice);
     }
+
+    private int dDayDiscount(int date) {
+        if (isAfterChristmas) return 0;
+        return 1000 + (date - 1) * 100;
+    }
+
+    private int weekDiscount() {
+        int discount = 0;
+        if (isWeekday) {
+            for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
+                String menu = entry.getKey();
+                int count = entry.getValue();
+                if(menu.equals("초코케이크") || menu.equals("아이스크림")){
+                    discount += count * 2023;
+                }
+            }
+        }
+
+        if (isWeekend) {
+            for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
+                String menu = entry.getKey();
+                int count = entry.getValue();
+                if(menu.equals("티본스테이크") || menu.equals("바비큐립") ||
+                        menu.equals("해산물파스타") || menu.equals("크리스마스파스타")){
+                    discount += count * 2023;
+                }
+            }
+        }
+        return discount;
+    }
+
+    private int specialDiscount() {
+        if(isSpecial) return 1000;
+        return 0;
+    }
+
+
 }
