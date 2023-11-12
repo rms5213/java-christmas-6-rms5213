@@ -41,7 +41,17 @@ public class Controller {
         totalBenefitPrice += dDayDiscount(date);
         totalBenefitPrice += weekDiscount();
         totalBenefitPrice += specialDiscount();
-//        totalBenefitPrice +=
+
+        printGiftOrNot(totalPrice);
+        //혜택 내역
+        printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount(),totalPrice);
+        int expectedPrice = totalPrice - totalBenefitPrice;
+
+
+        printTotalBenefitPrice(totalBenefitPrice);
+        printPriceAfterDiscount(expectedPrice);
+
+        printEventBadge(expectedPrice);
         //증정이벤트
         //배지
 
@@ -117,6 +127,27 @@ public class Controller {
         if(isSpecial) return 1000;
         return 0;
     }
+    private void printGiftOrNot(int totalPrice){
+        boolean gift = false;
+        if(totalPrice >= 120000) gift = true;
+        outputView.printBenefitMenu(gift);
+    }
+
+    private void printBenefitList(int dDay, int week, int special, int total){
+        outputView.printBenefitList(dDay, week, special, total);
+    }
+    private void printTotalBenefitPrice(int totalBenefitPrice){
+        outputView.printTotalBenefitPrice(totalBenefitPrice);
+    }
+    private void printPriceAfterDiscount(int expectedPrice){
+        outputView.printPriceAfterDiscount(expectedPrice);
+    }
+
+    private void printEventBadge(int totalBenefitPrice){
+        outputView.printBadge(totalBenefitPrice);
+    }
+
+
 
 
 }
