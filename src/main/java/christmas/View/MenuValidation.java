@@ -12,7 +12,6 @@ public class MenuValidation {
 
     public Map<String, Integer> validateMenuInput(String input) {
         Map<String, Integer> menuMap = new HashMap<>();
-        System.out.println("Valid?");
         String[] orders = input.split(",");
         for (String order : orders) {
             if (isValidFormat(order)) {
@@ -38,7 +37,7 @@ public class MenuValidation {
 
     private boolean isValidFormat(String input) {
         Matcher matcher = pattern.matcher(input);
-        System.out.println("input : " + input);
+        //System.out.println("input : " + input);
         return matcher.matches();
     }
 
