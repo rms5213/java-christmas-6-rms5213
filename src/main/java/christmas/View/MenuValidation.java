@@ -32,29 +32,6 @@ public class MenuValidation {
                 return null; // 에러가 발생하면 null 반환
             }
         }
-//        if (isValidFormat(input)) {
-//            System.out.println("Valid");
-//
-//            String[] orders = input.split(",");
-//
-//            for (String order : orders) {
-//                String[] menuAndCount = order.split("-");
-//                String menu = menuAndCount[0];
-//                int count = Integer.parseInt(menuAndCount[1]);
-//                System.out.println(menu + count);
-//
-//                if (isValidMenu(menu) && isValidCount(count)) {
-//                    menuMap.put(menu, count);
-//                } else {
-//                    printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-//                    return null; // 에러가 발생하면 null 반환
-//                }
-//            }
-//        } else {
-//            printErrorMessage("[ERROR] 유효하지 않은 주문 형식입니다. 다시 입력해 주세요.");
-//            return null; // 에러가 발생하면 null 반환
-//        }
-
         return menuMap;
     }
 
