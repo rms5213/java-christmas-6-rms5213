@@ -6,7 +6,7 @@ public class CheckCalendar {
 
     private final Calendar calendar;
     private static final int DEFAULT_YEAR = 2023;
-    private static final int DEFAULT_MONTH = 12;
+    private static final int DEFAULT_MONTH = Calendar.DECEMBER;
 
     public CheckCalendar(){
         this.calendar = Calendar.getInstance();
