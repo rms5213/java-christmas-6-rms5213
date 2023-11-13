@@ -27,7 +27,7 @@ public class InputView {
 
         // 날짜 유효성 검증
         while (!dateValidation.isValidDate(input)) {
-            System.out.println("[ERROR] 유효하지 않은 날짜 형식이거나 범위를 벗어났습니다. 다시 입력해 주세요.");
+            System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
             input = Console.readLine();
         }
 

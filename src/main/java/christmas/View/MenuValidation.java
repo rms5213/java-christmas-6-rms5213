@@ -24,11 +24,9 @@ public class MenuValidation {
                     menuMap.put(menu, count);
                 } else {
                     printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                    return null; // 에러가 발생하면 null 반환
                 }
             } else {
-                printErrorMessage("[ERROR] 유효하지 않은 주문 형식입니다. 다시 입력해 주세요.");
-                return null; // 에러가 발생하면 null 반환
+                printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
         return menuMap;
@@ -37,7 +35,6 @@ public class MenuValidation {
 
     private boolean isValidFormat(String input) {
         Matcher matcher = pattern.matcher(input);
-        //System.out.println("input : " + input);
         return matcher.matches();
     }
 
