@@ -6,6 +6,7 @@ public class OutputView {
 
     public void printInformation(int date) {
         System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println();
     }
 
     public void printMenu(Map<String, Integer> menuMap) {
@@ -15,17 +16,20 @@ public class OutputView {
             int count = entry.getValue();
             System.out.println(menu + " " + count + "개");
         }
+        System.out.println();
     }
 
     public void printTotalPrice(int totalPrice) {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(String.format("%,d", totalPrice) + "원");
+        System.out.println();
     }
 
     public void printBenefitMenu(boolean present) {
         System.out.println("<증정 메뉴>");
         if(!present) doesntExist();
         if(present) System.out.println("샴페인 1개");
+        System.out.println();
     }
 
     public void printBenefitList(int dDay, int week, int special, boolean gift) {
@@ -50,7 +54,7 @@ public class OutputView {
                 System.out.println(String.format("%,d", -25000) + "원");
             }
         }
-
+        System.out.println();
 
     }
 
@@ -58,11 +62,13 @@ public class OutputView {
         if(gift) benefitPrice += 25000;
         System.out.println("<총혜택 금액>");
         System.out.println(String.format("%,d", (-1) * benefitPrice) + "원");
+        System.out.println();
     }
 
     public void printPriceAfterDiscount(int priceAfterDisCount) {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(String.format("%,d", priceAfterDisCount) + "원");
+        System.out.println();
     }
 
     public void printBadge(int totalBenefitPrice) {
@@ -74,6 +80,7 @@ public class OutputView {
             System.out.println("트리");
         if(20000 <= totalBenefitPrice)
             System.out.println("산타");
+        System.out.println();
     }
 
     public void doesntExist(){
