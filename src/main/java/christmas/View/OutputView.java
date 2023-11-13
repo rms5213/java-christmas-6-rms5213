@@ -28,10 +28,10 @@ public class OutputView {
         if(present) System.out.println("샴페인 1개");
     }
 
-    public void printBenefitList(int dDay, int week, int special, int total) {
+    public void printBenefitList(int dDay, int week, int special, boolean gift) {
         int result = dDay + week + special;
         System.out.println("<혜택 내역>");
-        if(result == 0 && total < 120000) doesntExist();
+        if(result == 0 && !gift) doesntExist();
         if(result != 0){
             if(dDay != 0) {
                 System.out.print("크리스마스 디데이 할인: ");
@@ -45,7 +45,7 @@ public class OutputView {
                 System.out.print("특별 할인: ");
                 System.out.println(String.format("%,d", (-1) * special) + "원");
             }
-            if(total >= 120000) {
+            if(gift) {
                 System.out.print("증정 이벤트: ");
                 System.out.println(String.format("%,d", -25000) + "원");
             }
@@ -54,7 +54,8 @@ public class OutputView {
 
     }
 
-    public void printTotalBenefitPrice(int benefitPrice) {
+    public void printTotalBenefitPrice(int benefitPrice, boolean gift) {
+        if(gift) benefitPrice += 25000;
         System.out.println("<총혜택 금액>");
         System.out.println(String.format("%,d", (-1) * benefitPrice) + "원");
     }

@@ -19,7 +19,7 @@ public class Controller {
     private final Menu menu;
 
     private Map<String, Integer> menuMap;
-
+    boolean gift = false;
 
     public Controller(InputView inputView, OutputView outputView, CheckCalendar checkCalendar, Menu menu) {
         this.inputView = inputView;
@@ -44,7 +44,7 @@ public class Controller {
 
         printGiftOrNot(totalPrice);
         //혜택 내역
-        printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount(),totalPrice);
+        printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount());
         int expectedPrice = totalPrice - totalBenefitPrice;
 
 
@@ -128,16 +128,15 @@ public class Controller {
         return 0;
     }
     private void printGiftOrNot(int totalPrice){
-        boolean gift = false;
         if(totalPrice >= 120000) gift = true;
         outputView.printBenefitMenu(gift);
     }
 
-    private void printBenefitList(int dDay, int week, int special, int total){
-        outputView.printBenefitList(dDay, week, special, total);
+    private void printBenefitList(int dDay, int week, int special){
+        outputView.printBenefitList(dDay, week, special, gift);
     }
     private void printTotalBenefitPrice(int totalBenefitPrice){
-        outputView.printTotalBenefitPrice(totalBenefitPrice);
+        outputView.printTotalBenefitPrice(totalBenefitPrice, gift);
     }
     private void printPriceAfterDiscount(int expectedPrice){
         outputView.printPriceAfterDiscount(expectedPrice);
