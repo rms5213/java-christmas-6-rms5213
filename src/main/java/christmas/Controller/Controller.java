@@ -31,8 +31,8 @@ public class Controller {
     public void run() {
         int date = inputView.readDate();
         checkDate(date);
-        printInformation(date);
         menuMap = inputView.readMenu();
+        printInformation(date);
         printMenu(menuMap);
         int totalPrice = calculateTotalPrice(menuMap);
         printTotalPrice(totalPrice);
