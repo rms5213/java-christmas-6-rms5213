@@ -1,5 +1,6 @@
 package christmas.View;
 
+import christmas.Model.Menu;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;

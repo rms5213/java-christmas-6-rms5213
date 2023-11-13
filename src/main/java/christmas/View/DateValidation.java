@@ -7,7 +7,9 @@ public class DateValidation {
     private static final Pattern PATTERN = Pattern.compile(DATE_PATTERN);
 
     public boolean isValidDate(String input) {
-        return isValidFormat(input) && isValidRange(input);
+        boolean isValid = isValidFormat(input) && isValidRange(input);
+        if(!isValid) System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        return isValid;
     }
 
     private boolean isValidFormat(String input) {
