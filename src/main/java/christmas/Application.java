@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.View.DateValidation;
 import christmas.View.InputView;
 import christmas.View.OutputView;
 import christmas.View.MenuValidation;
@@ -12,7 +13,8 @@ public class Application {
 
     public static void main(String[] args) {
         MenuValidation menuValidation = new MenuValidation();
-        InputView inputView = new InputView(menuValidation);
+        DateValidation dateValidation = new DateValidation();
+        InputView inputView = new InputView(menuValidation,dateValidation);
         OutputView outputView = new OutputView();
         CheckCalendar checkCalendar = new CheckCalendar();
         Menu menu = new Menu();
