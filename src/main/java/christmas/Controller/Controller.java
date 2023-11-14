@@ -36,17 +36,17 @@ public class Controller {
         printMenu(menuMap);
         int totalPrice = calculateTotalPrice(menuMap);
         printTotalPrice(totalPrice);
+        printGiftOrNot(totalPrice);
+        //혜택 내역
 
         int totalBenefitPrice = 0;
         if(totalPrice >= 10000) {
             totalBenefitPrice += dDayDiscount(date);
             totalBenefitPrice += weekDiscount();
             totalBenefitPrice += specialDiscount();
+            printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount());
         }
-        printGiftOrNot(totalBenefitPrice);
-        //혜택 내역
-        printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount());
-        int expectedPrice = totalPrice - totalBenefitPrice;
+ int expectedPrice = totalPrice - totalBenefitPrice;
 
 
         printTotalBenefitPrice(totalBenefitPrice);
