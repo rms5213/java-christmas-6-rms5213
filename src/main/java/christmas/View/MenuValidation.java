@@ -15,6 +15,7 @@ public class MenuValidation {
 
     private static final String MENU_PATTERN = "([가-힣]+)-([1-9][0-9]*)";
     private static final Pattern pattern = Pattern.compile(MENU_PATTERN);
+    List<String> drinkMenuList = Arrays.asList("제로콜라", "레드와인", "샴페인");
     private final Menu menu; // 추가된 부분
     boolean isOrderCorrect = false;
 
@@ -48,9 +49,6 @@ public class MenuValidation {
                         return null;
                     }
                 } else {
-                    System.out.println("Menu" +isValidMenu(menu));
-                    System.out.println("Count" +isValidCount(count));
-                    System.out.println("Order" +isValidOrder(menu));
                     printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
                     return null;
                 }
@@ -85,24 +83,13 @@ public class MenuValidation {
         return totalCount > 20;
     }
 
-    private boolean isRedundant(int count){
-
-        return true;
-    }
-    private boolean isOnlyDrinks(int count){
-
-        return true;
-    }
     public boolean isValidOrder(String menu) {
          if (!isDrink(menu)) {
-                // 음료수외의 메뉴가 주문되었을 때
                 isOrderCorrect = true;
             }
         return isOrderCorrect;
     }
     private boolean isDrink(String menu) {
-        List<String> drinkMenuList = Arrays.asList("제로콜라", "레드와인", "샴페인");
-
         return drinkMenuList.contains(menu);
     }
 
