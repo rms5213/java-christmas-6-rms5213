@@ -12,12 +12,12 @@ import christmas.Controller.Controller;
 public class Application {
 
     public static void main(String[] args) {
-        MenuValidation menuValidation = new MenuValidation();
+        Menu menu = new Menu();
+        MenuValidation menuValidation = new MenuValidation(menu);
         DateValidation dateValidation = new DateValidation();
         InputView inputView = new InputView(menuValidation,dateValidation);
         OutputView outputView = new OutputView();
         CheckCalendar checkCalendar = new CheckCalendar();
-        Menu menu = new Menu();
 
         Controller controller = new Controller(inputView, outputView, checkCalendar, menu);
         controller.run();
