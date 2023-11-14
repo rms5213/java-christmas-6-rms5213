@@ -1,5 +1,6 @@
 package christmas.View;
 
+import christmas.Model.Menu;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -9,6 +10,11 @@ public class MenuValidation {
 
     private static final String MENU_PATTERN = "([가-힣]+)-([1-9][0-9]*)";
     private static final Pattern pattern = Pattern.compile(MENU_PATTERN);
+    private final Menu menu; // 추가된 부분
+
+    public MenuValidation(Menu menu) {
+        this.menu = menu;
+    }
 
     public Map<String, Integer> validateMenuInput(String input) {
         Map<String, Integer> menuMap = new HashMap<>();
@@ -31,9 +37,13 @@ public class MenuValidation {
                     }
                 } else {
                     printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                    menuMap = null;
+                    break;
                 }
             } else {
                 printErrorMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                menuMap = null;
+                break;
             }
         }
         return menuMap;
@@ -46,8 +56,7 @@ public class MenuValidation {
     }
 
     private boolean isValidMenu(String menu) {
-        // 실제 메뉴가 있는지 확인하는 로직 추가
-        return true;
+        return this.menu.isValidMenu(menu);
     }
 
     private boolean isValidCount(int count) {
@@ -60,5 +69,10 @@ public class MenuValidation {
 
     private boolean isExceedMax(int totalCount) {
         return totalCount > 20;
+    }
+
+    private boolean isredundant(int count){
+
+        return true;
     }
 }
