@@ -38,11 +38,12 @@ public class Controller {
         printTotalPrice(totalPrice);
 
         int totalBenefitPrice = 0;
-        totalBenefitPrice += dDayDiscount(date);
-        totalBenefitPrice += weekDiscount();
-        totalBenefitPrice += specialDiscount();
-
-        printGiftOrNot(totalPrice);
+        if(totalPrice >= 10000) {
+            totalBenefitPrice += dDayDiscount(date);
+            totalBenefitPrice += weekDiscount();
+            totalBenefitPrice += specialDiscount();
+        }
+        printGiftOrNot(totalBenefitPrice);
         //혜택 내역
         printBenefitList(dDayDiscount(date), weekDiscount(), specialDiscount());
         int expectedPrice = totalPrice - totalBenefitPrice;
