@@ -5,8 +5,7 @@ import java.util.*;
 public class OutputView {
 
     public void printInformation(int date) {
-        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println();
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
     }
 
     public void printMenu(Map<String, Integer> menuMap) {
@@ -21,7 +20,7 @@ public class OutputView {
 
     public void printTotalPrice(int totalPrice) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format("%,d", totalPrice) + "원");
+        printPriceFormat(totalPrice);
         System.out.println();
     }
 
@@ -39,26 +38,25 @@ public class OutputView {
             if(!gift) doesntExist();
             if(gift) {
                 System.out.print("증정 이벤트: ");
-                System.out.println(String.format("%,d", -25000) + "원");
+                printPriceFormat(-25000);
             }
         }
         if(result != 0){
             if(dDay != 0) {
                 System.out.print("크리스마스 디데이 할인: ");
-                System.out.println(String.format("%,d", (-1) * dDay) + "원");
+                printPriceFormat(-dDay);
             }
             if(week != 0) {
                 System.out.print("평일 할인: ");
-                System.out.println(String.format("%,d", (-1) * week) + "원");
+                printPriceFormat(-week);
             }
             if(special != 0) {
                 System.out.print("특별 할인: ");
-                System.out.println(String.format("%,d", (-1) * special) + "원");
+                printPriceFormat(-special);
             }
             if(gift) {
                 System.out.print("증정 이벤트: ");
-                System.out.println(String.format("%,d", -25000) + "원");
-            }
+                printPriceFormat(-25000);            }
         }
         System.out.println();
 
@@ -67,13 +65,13 @@ public class OutputView {
     public void printTotalBenefitPrice(int benefitPrice, boolean gift) {
         if(gift) benefitPrice += 25000;
         System.out.println("<총혜택 금액>");
-        System.out.println(String.format("%,d", (-1) * benefitPrice) + "원");
+        printPriceFormat(-benefitPrice);
         System.out.println();
     }
 
-    public void printPriceAfterDiscount(int priceAfterDisCount) {
+    public void printPriceAfterDiscount(int priceAfterDiscount) {
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(String.format("%,d", priceAfterDisCount) + "원");
+        printPriceFormat(priceAfterDiscount);
         System.out.println();
     }
 
@@ -93,4 +91,7 @@ public class OutputView {
         System.out.println("없음");
     }
 
+    public void printPriceFormat(int price){
+        System.out.println(String.format("%,d", price) + "원");
+    }
 }
