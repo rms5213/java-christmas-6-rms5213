@@ -3,15 +3,11 @@ package christmas.View;
 import christmas.Model.Menu;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.View.MenuValidation;
 
 
 public class InputView {
-    private static final String MENU_PATTERN = "([가-힣a-zA-Z0-9]+)-([1-9][0-9]*)";
-    private static final Pattern PATTERN = Pattern.compile(MENU_PATTERN);
     private final MenuValidation menuValidation;
     private final DateValidation dateValidation;
 
@@ -26,7 +22,6 @@ public class InputView {
 
         String input = Console.readLine();
 
-        // 날짜 유효성 검증
         while (!dateValidation.isValidDate(input)) {
             input = Console.readLine();
         }
