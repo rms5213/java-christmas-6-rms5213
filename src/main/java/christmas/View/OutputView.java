@@ -35,7 +35,13 @@ public class OutputView {
     public void printBenefitList(int dDay, int week, int special, boolean gift) {
         int result = dDay + week + special;
         System.out.println("<혜택 내역>");
-        if(result == 0 && !gift) doesntExist();
+        if(result == 0){
+            if(!gift) doesntExist();
+            if(gift) {
+                System.out.print("증정 이벤트: ");
+                System.out.println(String.format("%,d", -25000) + "원");
+            }
+        }
         if(result != 0){
             if(dDay != 0) {
                 System.out.print("크리스마스 디데이 할인: ");
