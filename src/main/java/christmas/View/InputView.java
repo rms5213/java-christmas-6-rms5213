@@ -28,12 +28,10 @@ public class InputView {
 
         // 날짜 유효성 검증
         while (!dateValidation.isValidDate(input)) {
-            //System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
             input = Console.readLine();
         }
 
-        int date = Integer.parseInt(input);
-        return date;
+        return Integer.parseInt(input);
     }
 
     public Map<String, Integer> readMenu() {
