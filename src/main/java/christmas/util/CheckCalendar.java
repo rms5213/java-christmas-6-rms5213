@@ -7,6 +7,7 @@ public class CheckCalendar {
     private final Calendar calendar;
     private static final int DEFAULT_YEAR = 2023;
     private static final int DEFAULT_MONTH = Calendar.DECEMBER;
+    private static final int CHRISTMAS = 25;
 
     public CheckCalendar(){
         this.calendar = Calendar.getInstance();
@@ -20,18 +21,18 @@ public class CheckCalendar {
     }
 
     public boolean isWeekday(int dayOfWeek) {
-        return dayOfWeek >= Calendar.MONDAY && dayOfWeek <= Calendar.FRIDAY;
+        return dayOfWeek >= Calendar.SUNDAY && dayOfWeek <= Calendar.THURSDAY;
     }
 
     public boolean isWeekend(int dayOfWeek) {
-        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+        return dayOfWeek == Calendar.FRIDAY || dayOfWeek == Calendar.SATURDAY;
     }
 
     public boolean isSpecial(int dayOfMonth, int dayOfWeek) {
-        return dayOfMonth == 25 || dayOfWeek == Calendar.SUNDAY;
+        return dayOfMonth == CHRISTMAS || dayOfWeek == Calendar.SUNDAY; // 상수화
     }
 
     public boolean isAfterChristmas(int dayOfMonth) {
-        return dayOfMonth > 25 ;
+        return dayOfMonth > CHRISTMAS ;
     }
 }
