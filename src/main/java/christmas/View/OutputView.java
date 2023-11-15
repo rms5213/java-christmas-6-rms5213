@@ -43,7 +43,6 @@ public class OutputView {
         for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
             String menu = entry.getKey();
             int count = entry.getValue();
-//            System.out.println(menu + " " + count + "개");
             System.out.printf(MENU_COUNT, menu, count);
         }
     }
@@ -109,7 +108,6 @@ public class OutputView {
         if(SANTA_BADGE_PRICE <= totalBenefitPrice)
             System.out.println(SANTA);
     }
-//상수화 마저 변경하기
     public void doesntExist(){
         System.out.println(DOESNT_EXIST);
     }
