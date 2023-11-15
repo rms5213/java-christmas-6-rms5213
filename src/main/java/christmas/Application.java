@@ -20,7 +20,7 @@ public class Application {
         OutputView outputView = new OutputView();
         CheckCalendar checkCalendar = new CheckCalendar();
         EventChecker eventChecker = new EventChecker(checkCalendar);
-        Controller controller = new Controller(inputView, outputView, checkCalendar, menu, eventChecker);
+        Controller controller = new Controller(inputView, outputView, menu, eventChecker);
         controller.run();
     }
 }
