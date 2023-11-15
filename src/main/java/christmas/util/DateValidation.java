@@ -1,4 +1,4 @@
-package christmas.View;
+package christmas.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

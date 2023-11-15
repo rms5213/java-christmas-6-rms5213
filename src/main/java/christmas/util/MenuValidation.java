@@ -1,4 +1,4 @@
-package christmas.View;
+package christmas.util;
 
 import christmas.Model.Menu;
 
