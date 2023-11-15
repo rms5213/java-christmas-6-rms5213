@@ -59,7 +59,7 @@ public class OutputView {
         if(totalPrice >= GIFT_STANDARD) System.out.println(EVENT_GIFT);
     }
 
-    public void printBenefitList(int dDay, int week, int special, int totalPrice) {
+    public void printBenefitList(int dDay, int week, int special, int totalPrice, boolean isWeekend) {
         int result = dDay + week + special;
         System.out.println(BENEFIT_LIST);
         if(result == 0){
@@ -75,7 +75,8 @@ public class OutputView {
                 printPriceFormat(-dDay);
             }
             if(week != 0) {
-                System.out.print(WEEKDAY_DISCOUNT);
+                if(!isWeekend)System.out.print(WEEKDAY_DISCOUNT);
+                if(isWeekend)System.out.print(WEEKEND_DISCOUNT);
                 printPriceFormat(-week);
             }
             if(special != 0) {

@@ -3,7 +3,6 @@ package christmas.Controller;
 import christmas.Model.EventProperties;
 import christmas.View.InputView;
 import christmas.View.OutputView;
-import christmas.util.CheckCalendar;
 import christmas.Model.Menu;
 import christmas.Model.EventChecker;
 
@@ -16,8 +15,8 @@ public class Controller {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final EventChecker eventChecker;
     private final Menu menu;
+    private final EventChecker eventChecker;
 
     private final List<String> weekdayDiscountList = Arrays.asList("초코케이크", "아이스크림");
     private final List<String> weekendDiscountList = Arrays.asList("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타");
@@ -98,13 +97,13 @@ public class Controller {
         return 0;
     }
 
-    private void printBenefitList(int dDay, int week, int special, int totalPrice) {
-        outputView.printBenefitList(dDay, week, special, totalPrice);
+    private void printBenefitList(int dDay, int week, int special, int totalPrice, boolean isWeekend) {
+        outputView.printBenefitList(dDay, week, special, totalPrice, isWeekend);
     }
 
     private int calculateBenefit(int totalPrice, int date, Map<String, Integer> menuMap, EventProperties eventProperties) {
         int benefitPrice = 0;
-        if (totalPrice < 10000) printBenefitList(0, 0, 0, 0);
+        if (totalPrice < 10000) printBenefitList(0, 0, 0, 0, eventProperties.isWeekend());
         if (totalPrice >= 10000) {
             int dDay = dDayDiscount(date, eventProperties);
             int week = weekDiscount(menuMap, eventProperties);
@@ -112,7 +111,7 @@ public class Controller {
             benefitPrice += dDay;
             benefitPrice += week;
             benefitPrice += special;
-            printBenefitList(dDay, week, special, totalPrice);
+            printBenefitList(dDay, week, special, totalPrice, eventProperties.isWeekend());
         }
         return benefitPrice;
     }
