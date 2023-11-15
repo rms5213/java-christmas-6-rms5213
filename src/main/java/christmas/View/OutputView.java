@@ -100,8 +100,9 @@ public class OutputView {
         printPriceFormat(priceAfterDiscount);
     }
 
-    public void printBadge(int totalBenefitPrice) {
+    public void printBadge(int totalBenefitPrice, int totalPrice) {
         System.out.println(EVENT_BADGE);
+        if(totalPrice >= GIFT_STANDARD) totalBenefitPrice += CHAMPAGNE_PRICE;
         if(totalBenefitPrice < STAR_BADGE_PRICE) doesntExist();
         if(STAR_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < TREE_BADGE_PRICE)
             System.out.println(STAR);
