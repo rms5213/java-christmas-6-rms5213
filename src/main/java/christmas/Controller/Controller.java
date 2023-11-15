@@ -6,9 +6,6 @@ import christmas.View.OutputView;
 import christmas.Model.Menu;
 import christmas.Model.EventChecker;
 
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Controller {
@@ -22,11 +19,7 @@ public class Controller {
     private static final int SPECIAL_DISCOUNT = 1000;
     private static final int WEEK_DISCOUNT = 2023;
 
-    private final List<String> weekdayDiscountList = Arrays.asList("초코케이크", "아이스크림");
-    private final List<String> weekendDiscountList = Arrays.asList("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타");
-
-
-    public Controller(InputView inputView, OutputView outputView, Menu menu,EventChecker eventChecker) {
+    public Controller(InputView inputView, OutputView outputView, Menu menu, EventChecker eventChecker) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.menu = menu;
@@ -76,7 +69,6 @@ public class Controller {
     }
 
 
-
     private int dDayDiscount(int date, EventProperties eventProperties) {
         if (eventProperties.isAfterChristmas()) return 0;
         return 1000 + (date - 1) * 100;
@@ -85,12 +77,15 @@ public class Controller {
     private int weekDiscount(Map<String, Integer> menuMap, EventProperties eventProperties) {
         int discount = 0;
         for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
-            String menu = entry.getKey();
+            String menuName = entry.getKey();
             int count = entry.getValue();
 
-            if ((eventProperties.isWeekday() && weekdayDiscountList.contains(menu)) || (eventProperties.isWeekend() && weekendDiscountList.contains(menu))) {
+            Menu.Category category = menu.getCategory(menuName);
+            if ((eventProperties.isWeekday() && category == Menu.Category.DESSERT)
+                    || (eventProperties.isWeekend() && category == Menu.Category.MAIN)) {
                 discount += count * WEEK_DISCOUNT;
             }
+
         }
         return discount;
     }
