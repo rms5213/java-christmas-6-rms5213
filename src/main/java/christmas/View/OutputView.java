@@ -29,6 +29,7 @@ public class OutputView {
     private static final int STAR_BADGE_PRICE = 5000;
     private static final int TREE_BADGE_PRICE = 10000;
     private static final int SANTA_BADGE_PRICE = 20000;
+    private static final int GIFT_STANDARD = 120000;
 
     private static final String STAR = "별";
     private static final String TREE = "트리";
@@ -52,18 +53,18 @@ public class OutputView {
         printPriceFormat(totalPrice);
     }
 
-    public void printBenefitMenu(boolean present) {
+    public void printBenefitMenu(int totalPrice) {
         System.out.println(GIFT_MENU);
-        if(!present) doesntExist();
-        if(present) System.out.println(EVENT_GIFT);
+        if(totalPrice < GIFT_STANDARD) doesntExist();
+        if(totalPrice >= GIFT_STANDARD) System.out.println(EVENT_GIFT);
     }
 
-    public void printBenefitList(int dDay, int week, int special, boolean gift) {
+    public void printBenefitList(int dDay, int week, int special, int totalPrice) {
         int result = dDay + week + special;
         System.out.println(BENEFIT_LIST);
         if(result == 0){
-            if(!gift) doesntExist();
-            if(gift) {
+            if(totalPrice < GIFT_STANDARD) doesntExist();
+            if(totalPrice >= GIFT_STANDARD ) {
                 System.out.print(GIFT_EVENT);
                 printPriceFormat(-CHAMPAGNE_PRICE);
             }
@@ -81,14 +82,14 @@ public class OutputView {
                 System.out.print(SPECIAL_DISCOUNT);
                 printPriceFormat(-special);
             }
-            if(gift) {
+            if(totalPrice >= GIFT_STANDARD) {
                 System.out.print(GIFT_EVENT);
                 printPriceFormat(-CHAMPAGNE_PRICE);            }
         }
     }
 
-    public void printTotalBenefitPrice(int benefitPrice, boolean gift) {
-        if(gift) benefitPrice += CHAMPAGNE_PRICE;
+    public void printTotalBenefitPrice(int benefitPrice, int totalPrice) {
+        if(totalPrice >= GIFT_STANDARD) benefitPrice += CHAMPAGNE_PRICE;
         System.out.println(TOTAL_BENEFIT_PRICE);
         printPriceFormat(-benefitPrice);
     }
