@@ -1,5 +1,6 @@
 # 미션 - 크리스마스 프로모션
 
+
 ## 🚨 기능 요구 사항
 
 이번 미션은 이메일 형식의 기능 요구 사항이다.
@@ -89,53 +90,38 @@ input
 없음
 
 
-이번 추가된 요구사항으로 InputView 와 OutputView 가 주어졌다. 
-저번주차의 MVC를 이용하면될듯
 
-## Class
+## Class(Tree Expression)
 
 
-  - Application
-## Model
-### Events
-  
-### Benefits
-  - TotalBenefit
-  - BenefitBadge
-#### Discount
-  - DdayDiscount
-  - WeekdayDiscount
-  - WeekendDiscount
-  - SpecialDiscount
-#### Present
-  - PresentEvent
-
-### Callender
-  - Date
-  - Week
-  - 달력을 날짜와 요일로 나눌것인가? 합칠것인가?
-  
-
-
-## View
-  - InputView
-  - OutputView
-
-## Controller
-  - Controller
-  - 컨트롤러를 어떻게 쪼개야할까,,,
-
-## Util
-  - MagicNumber
-  - Amount
-  - Phrase
-  - InputValidation
-
-
-
-돈은 어차피 고정된 값이니까 그냥 인스턴스 필드로 던져줘도 괜찮다
- 그렇다면 매직넘버로?
-
+C:.
+├─main
+│  └─java
+│      └─christmas
+│          │  Application.java
+│          │  
+│          ├─Controller
+│          │      Controller.java
+│          │      
+│          ├─Model
+│          │      EventChecker.java
+│          │      EventProperties.java
+│          │      Menu.java
+│          │      
+│          ├─util
+│          │      CheckCalendar.java
+│          │      DateValidation.java
+│          │      MenuValidation.java
+│          │      
+│          └─View
+│                  InputView.java
+│                  OutputView.java
+│                  
+└─test
+└─java
+└─christmas
+ApplicationTest.java
+                
 
 
 
