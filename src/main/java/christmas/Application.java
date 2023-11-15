@@ -16,7 +16,7 @@ public class Application {
         Menu menu = new Menu();
         MenuValidation menuValidation = new MenuValidation(menu);
         DateValidation dateValidation = new DateValidation();
-        InputView inputView = new InputView(menuValidation,dateValidation);
+        InputView inputView = new InputView(menuValidation, dateValidation);
         OutputView outputView = new OutputView();
         CheckCalendar checkCalendar = new CheckCalendar();
         EventChecker eventChecker = new EventChecker(checkCalendar);

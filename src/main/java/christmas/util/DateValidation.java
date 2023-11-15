@@ -2,6 +2,7 @@ package christmas.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class DateValidation {
     private static final String ERROR_INVALID_DATE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     private static final int MONTH_START = 1;
@@ -12,7 +13,7 @@ public class DateValidation {
 
     public boolean isValidDate(String input) {
         boolean isValid = isValidFormat(input) && isValidRange(input);
-        if(!isValid) System.out.println(ERROR_INVALID_DATE);
+        if (!isValid) System.out.println(ERROR_INVALID_DATE);
         return isValid;
     }
 

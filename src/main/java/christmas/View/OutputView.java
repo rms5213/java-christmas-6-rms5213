@@ -36,7 +36,7 @@ public class OutputView {
     private static final String SANTA = "산타";
 
     public void printInformation(int date) {
-        System.out.printf(OUTPUT_INFORMATION_MESSAGE,date);
+        System.out.printf(OUTPUT_INFORMATION_MESSAGE, date);
     }
 
     public void printMenu(Map<String, Integer> menuMap) {
@@ -55,42 +55,43 @@ public class OutputView {
 
     public void printBenefitMenu(int totalPrice) {
         System.out.println(GIFT_MENU);
-        if(totalPrice < GIFT_STANDARD) doesntExist();
-        if(totalPrice >= GIFT_STANDARD) System.out.println(EVENT_GIFT);
+        if (totalPrice < GIFT_STANDARD) doesntExist();
+        if (totalPrice >= GIFT_STANDARD) System.out.println(EVENT_GIFT);
     }
 
     public void printBenefitList(int dDay, int week, int special, int totalPrice, boolean isWeekend) {
         int result = dDay + week + special;
         System.out.println(BENEFIT_LIST);
-        if(result == 0){
-            if(totalPrice < GIFT_STANDARD) doesntExist();
-            if(totalPrice >= GIFT_STANDARD ) {
+        if (result == 0) {
+            if (totalPrice < GIFT_STANDARD) doesntExist();
+            if (totalPrice >= GIFT_STANDARD) {
                 System.out.print(GIFT_EVENT);
                 printPriceFormat(-CHAMPAGNE_PRICE);
             }
         }
-        if(result != 0){
-            if(dDay != 0) {
+        if (result != 0) {
+            if (dDay != 0) {
                 System.out.print(CHRISTMAS_DAY_DISCOUNT);
                 printPriceFormat(-dDay);
             }
-            if(week != 0) {
-                if(!isWeekend)System.out.print(WEEKDAY_DISCOUNT);
-                if(isWeekend)System.out.print(WEEKEND_DISCOUNT);
+            if (week != 0) {
+                if (!isWeekend) System.out.print(WEEKDAY_DISCOUNT);
+                if (isWeekend) System.out.print(WEEKEND_DISCOUNT);
                 printPriceFormat(-week);
             }
-            if(special != 0) {
+            if (special != 0) {
                 System.out.print(SPECIAL_DISCOUNT);
                 printPriceFormat(-special);
             }
-            if(totalPrice >= GIFT_STANDARD) {
+            if (totalPrice >= GIFT_STANDARD) {
                 System.out.print(GIFT_EVENT);
-                printPriceFormat(-CHAMPAGNE_PRICE);            }
+                printPriceFormat(-CHAMPAGNE_PRICE);
+            }
         }
     }
 
     public void printTotalBenefitPrice(int benefitPrice, int totalPrice) {
-        if(totalPrice >= GIFT_STANDARD) benefitPrice += CHAMPAGNE_PRICE;
+        if (totalPrice >= GIFT_STANDARD) benefitPrice += CHAMPAGNE_PRICE;
         System.out.println(TOTAL_BENEFIT_PRICE);
         printPriceFormat(-benefitPrice);
     }
@@ -102,20 +103,21 @@ public class OutputView {
 
     public void printBadge(int totalBenefitPrice, int totalPrice) {
         System.out.println(EVENT_BADGE);
-        if(totalPrice >= GIFT_STANDARD) totalBenefitPrice += CHAMPAGNE_PRICE;
-        if(totalBenefitPrice < STAR_BADGE_PRICE) doesntExist();
-        if(STAR_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < TREE_BADGE_PRICE)
+        if (totalPrice >= GIFT_STANDARD) totalBenefitPrice += CHAMPAGNE_PRICE;
+        if (totalBenefitPrice < STAR_BADGE_PRICE) doesntExist();
+        if (STAR_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < TREE_BADGE_PRICE)
             System.out.println(STAR);
-        if(TREE_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < SANTA_BADGE_PRICE)
+        if (TREE_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < SANTA_BADGE_PRICE)
             System.out.println(TREE);
-        if(SANTA_BADGE_PRICE <= totalBenefitPrice)
+        if (SANTA_BADGE_PRICE <= totalBenefitPrice)
             System.out.println(SANTA);
     }
-    public void doesntExist(){
+
+    public void doesntExist() {
         System.out.println(DOESNT_EXIST);
     }
 
-    public void printPriceFormat(int price){
+    public void printPriceFormat(int price) {
         System.out.println(String.format("%,d", price) + "원");
     }
 }

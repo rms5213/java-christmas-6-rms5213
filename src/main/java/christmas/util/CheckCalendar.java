@@ -9,7 +9,7 @@ public class CheckCalendar {
     private static final int DEFAULT_MONTH = Calendar.DECEMBER;
     private static final int CHRISTMAS = 25;
 
-    public CheckCalendar(){
+    public CheckCalendar() {
         this.calendar = Calendar.getInstance();
         this.calendar.set(Calendar.YEAR, DEFAULT_YEAR);
         this.calendar.set(Calendar.MONTH, DEFAULT_MONTH);
@@ -33,6 +33,6 @@ public class CheckCalendar {
     }
 
     public boolean isAfterChristmas(int dayOfMonth) {
-        return dayOfMonth > CHRISTMAS ;
+        return dayOfMonth > CHRISTMAS;
     }
 }

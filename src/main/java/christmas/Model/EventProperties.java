@@ -12,6 +12,7 @@ public class EventProperties {
         this.isSpecial = isSpecial;
         this.isAfterChristmas = isAfterChristmas;
     }
+
     public boolean isWeekday() {
         return isWeekday;
     }

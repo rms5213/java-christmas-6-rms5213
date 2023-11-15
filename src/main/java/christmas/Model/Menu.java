@@ -73,6 +73,7 @@ public class Menu {
         if (menuItem == null) return 0;
         return menuItem.getPrice();
     }
+
     public Category getCategory(String menu) {
         MenuItem menuItem = menuMap.get(menu);
         if (menuItem == null) return null;
