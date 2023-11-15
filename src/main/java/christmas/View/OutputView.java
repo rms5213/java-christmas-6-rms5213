@@ -3,92 +3,115 @@ package christmas.View;
 import java.util.*;
 
 public class OutputView {
+    private static final String OUTPUT_INFORMATION_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
+    private static final String ORDERED_MENU = "\n<주문 메뉴>";
+    private static final String MENU_COUNT = "%s %d개\n";
+
+    private static final String TOTAL_PRICE = "\n<할인 전 총주문 금액>";
+    private static final String GIFT_MENU = "\n<증정 메뉴>";
+    private static final String EVENT_GIFT = "샴페인 1개";
+
+    private static final String BENEFIT_LIST = "\n<혜택 내역>";
+
+    private static final String GIFT_EVENT = "증정 이벤트: ";
+    private static final String CHRISTMAS_DAY_DISCOUNT = "크리스마스 디데이 할인: ";
+    private static final String WEEKDAY_DISCOUNT = "평일 할인: ";
+    private static final String WEEKEND_DISCOUNT = "주말 할인: ";
+    private static final String SPECIAL_DISCOUNT = "특별 할인: ";
+    private static final String DOESNT_EXIST = "없음";
+
+
+    private static final String TOTAL_BENEFIT_PRICE = "\n<총혜택 금액>";
+    private static final String PRICE_AFTER_DISCOUNT = "\n<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE = "\n<12월 이벤트 배지>";
+
+    private static final int CHAMPAGNE_PRICE = 25000;
+    private static final int STAR_BADGE_PRICE = 5000;
+    private static final int TREE_BADGE_PRICE = 10000;
+    private static final int SANTA_BADGE_PRICE = 20000;
+
+    private static final String STAR = "별";
+    private static final String TREE = "트리";
+    private static final String SANTA = "산타";
 
     public void printInformation(int date) {
-        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        System.out.printf(OUTPUT_INFORMATION_MESSAGE,date);
     }
 
     public void printMenu(Map<String, Integer> menuMap) {
-        System.out.println("<주문 메뉴>");
+        System.out.println(ORDERED_MENU);
         for (Map.Entry<String, Integer> entry : menuMap.entrySet()) {
             String menu = entry.getKey();
             int count = entry.getValue();
-            System.out.println(menu + " " + count + "개");
+//            System.out.println(menu + " " + count + "개");
+            System.out.printf(MENU_COUNT, menu, count);
         }
-        System.out.println();
     }
 
     public void printTotalPrice(int totalPrice) {
-        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(TOTAL_PRICE);
         printPriceFormat(totalPrice);
-        System.out.println();
     }
 
     public void printBenefitMenu(boolean present) {
-        System.out.println("<증정 메뉴>");
+        System.out.println(GIFT_MENU);
         if(!present) doesntExist();
-        if(present) System.out.println("샴페인 1개");
-        System.out.println();
+        if(present) System.out.println(EVENT_GIFT);
     }
 
     public void printBenefitList(int dDay, int week, int special, boolean gift) {
         int result = dDay + week + special;
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFIT_LIST);
         if(result == 0){
             if(!gift) doesntExist();
             if(gift) {
-                System.out.print("증정 이벤트: ");
-                printPriceFormat(-25000);
+                System.out.print(GIFT_EVENT);
+                printPriceFormat(-CHAMPAGNE_PRICE);
             }
         }
         if(result != 0){
             if(dDay != 0) {
-                System.out.print("크리스마스 디데이 할인: ");
+                System.out.print(CHRISTMAS_DAY_DISCOUNT);
                 printPriceFormat(-dDay);
             }
             if(week != 0) {
-                System.out.print("평일 할인: ");
+                System.out.print(WEEKDAY_DISCOUNT);
                 printPriceFormat(-week);
             }
             if(special != 0) {
-                System.out.print("특별 할인: ");
+                System.out.print(SPECIAL_DISCOUNT);
                 printPriceFormat(-special);
             }
             if(gift) {
-                System.out.print("증정 이벤트: ");
-                printPriceFormat(-25000);            }
+                System.out.print(GIFT_EVENT);
+                printPriceFormat(-CHAMPAGNE_PRICE);            }
         }
-        System.out.println();
-
     }
 
     public void printTotalBenefitPrice(int benefitPrice, boolean gift) {
-        if(gift) benefitPrice += 25000;
-        System.out.println("<총혜택 금액>");
+        if(gift) benefitPrice += CHAMPAGNE_PRICE;
+        System.out.println(TOTAL_BENEFIT_PRICE);
         printPriceFormat(-benefitPrice);
-        System.out.println();
     }
 
     public void printPriceAfterDiscount(int priceAfterDiscount) {
-        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(PRICE_AFTER_DISCOUNT);
         printPriceFormat(priceAfterDiscount);
-        System.out.println();
     }
 
     public void printBadge(int totalBenefitPrice) {
-        System.out.println("<12월 이벤트 배지>");
-        if(totalBenefitPrice < 5000) doesntExist();
-        if(5000 <= totalBenefitPrice && totalBenefitPrice < 10000)
-            System.out.println("별");
-        if(10000 <= totalBenefitPrice && totalBenefitPrice < 20000)
-            System.out.println("트리");
-        if(20000 <= totalBenefitPrice)
-            System.out.println("산타");
-        System.out.println();
+        System.out.println(EVENT_BADGE);
+        if(totalBenefitPrice < STAR_BADGE_PRICE) doesntExist();
+        if(STAR_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < TREE_BADGE_PRICE)
+            System.out.println(STAR);
+        if(TREE_BADGE_PRICE <= totalBenefitPrice && totalBenefitPrice < SANTA_BADGE_PRICE)
+            System.out.println(TREE);
+        if(SANTA_BADGE_PRICE <= totalBenefitPrice)
+            System.out.println(SANTA);
     }
-
+//상수화 마저 변경하기
     public void doesntExist(){
-        System.out.println("없음");
+        System.out.println(DOESNT_EXIST);
     }
 
     public void printPriceFormat(int price){
