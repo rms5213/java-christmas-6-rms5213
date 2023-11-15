@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.Model.EventChecker;
 import christmas.View.DateValidation;
 import christmas.View.InputView;
 import christmas.View.OutputView;
@@ -18,8 +19,8 @@ public class Application {
         InputView inputView = new InputView(menuValidation,dateValidation);
         OutputView outputView = new OutputView();
         CheckCalendar checkCalendar = new CheckCalendar();
-
-        Controller controller = new Controller(inputView, outputView, checkCalendar, menu);
+        EventChecker eventChecker = new EventChecker(checkCalendar);
+        Controller controller = new Controller(inputView, outputView, checkCalendar, menu, eventChecker);
         controller.run();
     }
 }
