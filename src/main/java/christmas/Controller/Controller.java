@@ -18,6 +18,10 @@ public class Controller {
     private final Menu menu;
     private final EventChecker eventChecker;
 
+    private static final int BENEFIT_STANDARD = 10000;
+    private static final int SPECIAL_DISCOUNT = 1000;
+    private static final int WEEK_DISCOUNT = 2023;
+
     private final List<String> weekdayDiscountList = Arrays.asList("초코케이크", "아이스크림");
     private final List<String> weekendDiscountList = Arrays.asList("티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타");
 
@@ -47,14 +51,13 @@ public class Controller {
 
     private void afterApplyBenefit(int date, int totalPrice, Map<String, Integer> menuMap) {
         EventProperties eventProperties = eventChecker.checkDate(date);
+        outputView.printBenefitMenu(totalPrice);
 
         int totalBenefitPrice = calculateBenefit(totalPrice, date, menuMap, eventProperties);
         int expectedPrice = totalPrice - totalBenefitPrice;
-
-        outputView.printBenefitMenu(totalPrice);
         outputView.printTotalBenefitPrice(totalBenefitPrice, totalPrice);
         outputView.printPriceAfterDiscount(expectedPrice);
-        outputView.printBadge(totalBenefitPrice);
+        outputView.printBadge(totalBenefitPrice, totalPrice);
 
     }
 
@@ -86,14 +89,14 @@ public class Controller {
             int count = entry.getValue();
 
             if ((eventProperties.isWeekday() && weekdayDiscountList.contains(menu)) || (eventProperties.isWeekend() && weekendDiscountList.contains(menu))) {
-                discount += count * 2023;
+                discount += count * WEEK_DISCOUNT;
             }
         }
         return discount;
     }
 
     private int specialDiscount(EventProperties eventProperties) {
-        if (eventProperties.isSpecial()) return 1000;
+        if (eventProperties.isSpecial()) return SPECIAL_DISCOUNT;
         return 0;
     }
 
@@ -103,8 +106,8 @@ public class Controller {
 
     private int calculateBenefit(int totalPrice, int date, Map<String, Integer> menuMap, EventProperties eventProperties) {
         int benefitPrice = 0;
-        if (totalPrice < 10000) printBenefitList(0, 0, 0, 0, eventProperties.isWeekend());
-        if (totalPrice >= 10000) {
+        if (totalPrice < BENEFIT_STANDARD) printBenefitList(0, 0, 0, 0, eventProperties.isWeekend());
+        if (totalPrice >= BENEFIT_STANDARD) {
             int dDay = dDayDiscount(date, eventProperties);
             int week = weekDiscount(menuMap, eventProperties);
             int special = specialDiscount(eventProperties);
