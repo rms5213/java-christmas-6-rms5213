@@ -1,10 +1,10 @@
 package christmas;
 
 import christmas.Model.EventChecker;
-import christmas.View.DateValidation;
+import christmas.util.DateValidation;
 import christmas.View.InputView;
 import christmas.View.OutputView;
-import christmas.View.MenuValidation;
+import christmas.util.MenuValidation;
 import christmas.util.CheckCalendar;
 import christmas.Model.Menu;
 import christmas.Controller.Controller;
