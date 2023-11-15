@@ -15,9 +15,14 @@ public class MenuValidation {
 
     private static final String MENU_PATTERN = "([가-힣]+)-([1-9][0-9]*)";
     private static final Pattern pattern = Pattern.compile(MENU_PATTERN);
-    List<String> drinkMenuList = Arrays.asList("제로콜라", "레드와인", "샴페인");
-    private final Menu menu; // 추가된 부분
+
+    private static final int NONE = 0;
+    private static final int MAX_ORDER = 20;
+    private final Menu menu;
     boolean isOrderCorrect = false;
+
+
+    List<String> drinkMenuList = Arrays.asList("제로콜라", "레드와인", "샴페인"); //enum화 필요
 
 
     public MenuValidation(Menu menu) {
@@ -44,7 +49,7 @@ public class MenuValidation {
                 if (isValidMenu(menu) && isValidCount(count) && isValidOrder(menu)) {
                     menuMap.put(menu, count);
                     totalOrder += count;
-                    if(isExceedMax(totalOrder)){
+                    if (isExceedMax(totalOrder)) {
                         printErrorMessage("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
                         return null;
                     }
@@ -68,11 +73,11 @@ public class MenuValidation {
     }
 
     private boolean isValidMenu(String menu) {
-        return this.menu.isValidMenu(menu);
+        return menu != null && this.menu.getPrice(menu) > 0;
     }
 
     private boolean isValidCount(int count) {
-        return count > 0;
+        return count > NONE;
     }
 
     private void printErrorMessage(String message) {
@@ -80,15 +85,16 @@ public class MenuValidation {
     }
 
     private boolean isExceedMax(int totalCount) {
-        return totalCount > 20;
+        return totalCount > MAX_ORDER;
     }
 
     public boolean isValidOrder(String menu) {
-         if (!isDrink(menu)) {
-                isOrderCorrect = true;
-            }
+        if (!isDrink(menu)) {
+            isOrderCorrect = true;
+        }
         return isOrderCorrect;
     }
+
     private boolean isDrink(String menu) {
         return drinkMenuList.contains(menu);
     }
