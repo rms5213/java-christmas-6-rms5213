@@ -29,7 +29,7 @@ public class CheckCalendar {
     }
 
     public boolean isSpecial(int dayOfMonth, int dayOfWeek) {
-        return dayOfMonth == CHRISTMAS || dayOfWeek == Calendar.SUNDAY; // 상수화
+        return dayOfMonth == CHRISTMAS || dayOfWeek == Calendar.SUNDAY;
     }
 
     public boolean isAfterChristmas(int dayOfMonth) {
