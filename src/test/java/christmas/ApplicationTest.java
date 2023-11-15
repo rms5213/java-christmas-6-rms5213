@@ -32,6 +32,77 @@ class ApplicationTest extends NsTest {
             assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "없음");
         });
     }
+    @Test
+    void 배지_내역_없음_출력() {
+        assertSimpleTest(() -> {
+            run("26", "타파스-1,제로콜라-1");
+            assertThat(output()).contains("<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
+        });
+    }
+    @Test
+    void 중복메뉴_예외테스트() {
+        assertSimpleTest(() -> {
+            runException("26", "타파스-1,타파스-1");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    void 메뉴20초과_예외테스트() {
+        assertSimpleTest(() -> {
+            runException("26", "타파스-10,제로콜라-11");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
+    void 만원이하_이벤트미적용() {
+        assertSimpleTest(() -> {
+            run("26", "타파스-1,제로콜라-1");
+            assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "없음");
+        });
+    }
+    @Test
+    void 증정_메뉴_없음_출력() {
+        assertSimpleTest(() -> {
+            run("26", "타파스-1,제로콜라-1");
+            assertThat(output()).contains("<증정 메뉴>" + LINE_SEPARATOR + "없음");
+        });
+    }
+    @Test
+    void 잘못된주문_예외테스트() {
+        assertSimpleTest(() -> {
+            runException("26", ",");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    void 잘못된주문_예외테스트2() {
+        assertSimpleTest(() -> {
+            runException("26", ",,");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    void 잘못된주문_예외테스트3() {
+        assertSimpleTest(() -> {
+            runException("26", ",,");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    void 잘못된주문_예외테스트4() {
+        assertSimpleTest(() -> {
+            runException("26", "타파스-,1제로콜라-2");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
+    void 잘못된주문_예외테스트5() {
+        assertSimpleTest(() -> {
+            runException("26", "타파스-,제로콜라-4,양송이수프-4");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
 
     @Test
     void 날짜_예외_테스트() {
